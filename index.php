@@ -27,7 +27,7 @@
 	<body>
 	
 		<h1>Server Account Location</h1>
-		<br />
+
 		Search for an account: <input id="search" placeholder="Search" autocomplete="off" autofocus="true" align="middle"/>
 		
 		<table id="accounts" class="tablesorter">
@@ -44,18 +44,22 @@
 <?php
  
 	ini_set('max_execution_time', 90000); //300 seconds = 5 minutes
-	 
-	$whmpassword = 'CHANGEME';    /*  <== put in the root password for WHM which also works for cpanel for any user */
-
+	
+	/* Change this part to ensure you list the data from a server which actually exists! */
 	$servers = array (
 
-		"myserver.domain.com",
+		array("server" => "myserver.domain.com", "username" => "root", "password" => "CHANGEME",),
 
 	);
-
+	
+	// No need to change anything else below
 	$server_counts = array();
 	
-	foreach ($servers as $server) {
+	foreach ($servers as $serverdetails) {
+		
+		$server = $serverdetails["server"];
+		$username = $serverdetails["username"];
+		$password = $serverdetails["password"];
 		
 		$server_count = 0;
 		$query = 'https://' . $server . ':2087/json-api/listaccts?api.version=1&want=domain';
@@ -66,7 +70,7 @@
 		curl_setopt($curl, CURLOPT_HEADER,0);          
 		curl_setopt($curl, CURLOPT_RETURNTRANSFER,1);  
 		$header[0] = "Authorization: Basic " . 
-		base64_encode("root".":".$whmpassword) . "\n\r";
+		base64_encode($username.":".$password) . "\n\r";
 		curl_setopt($curl, CURLOPT_HTTPHEADER, $header); 
 		curl_setopt($curl, CURLOPT_URL, $query); 
 		$result = curl_exec($curl);
