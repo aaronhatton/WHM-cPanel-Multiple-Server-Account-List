@@ -21,6 +21,7 @@
 		</style>
 		<link href="js\tablesorter\themes\blue\style.css" rel="stylesheet" type="text/css"/>
 
+		<title>WHM/cPanel Server Account Locator</title>
 		
 	</head>
 	
