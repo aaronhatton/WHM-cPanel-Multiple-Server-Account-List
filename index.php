@@ -29,7 +29,7 @@
 	
 		<h1>Server Account Location</h1>
 
-		Search for an account: <input id="search" placeholder="Search" autocomplete="off" autofocus="true" align="middle"/>
+		Search for an account: <input id="search" type="search" placeholder="Search" autocomplete="off" autofocus="true" align="middle"/>
 		
 		<table id="accounts" class="tablesorter">
 			<thead>
